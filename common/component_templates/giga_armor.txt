@@ -1,0 +1,51 @@
+#############
+### ARMOR ###
+#############
+# SM/QNM
+utility_component_template = {
+	key = "SENTIENT_ARMOR_LARGE"
+	size = large
+	icon = "GFX_sentient_armor"
+	icon_frame = 1
+	component_set = "SENTIENT_ARMOR"
+	power = 100
+	prerequisites = { "tech_sm_armor" }
+	size_restriction = { 
+		giga_massive_planet 
+		giga_war_moon_fe 
+		giga_planet_behemoth 
+		giga_planet_behemoth_fe 
+		giga_systemcraft
+	}
+	modifier = {
+		ship_armor_add = 40000
+		ship_shield_add = 40000
+		ship_hull_add = 40000
+		ship_shield_regen_add_static = 2000
+	}
+	resources = {
+		category = ship_components
+		cost = { sr_dark_matter = 2  alloys = 20 }
+		upkeep = { energy = 0 alloys = 0 }
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}
+
+# SA
+utility_component_template = {
+	key = "SA_ARMOR"
+	size = large
+	icon = "GFX_sa_armor"
+	icon_frame = 1
+	power = 0
+	size_restriction = { annihilator annihilator_sk }
+	component_set = "SA_ARMOR"
+
+	modifier = {
+		ship_armor_add = @ehof_armor_3L
+		ship_shield_add = @ehof_shield_L3
+	}
+}

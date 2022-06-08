@@ -1,0 +1,85 @@
+# Leviathan reactor
+utility_component_template = {
+	key = "REACTOR_LEVIATHAN"
+	size = small
+	icon = "GFX_ship_part_bio_reactor"
+	icon_frame = 1
+	power = 4000
+	component_set = "power_core"
+	size_restriction = { giga_space_dragon giga_elder_tiyanki giga_wraith giga_voidspawn giga_stellarite }
+}
+
+# Swarm reactor
+utility_component_template = {
+	key = "REACTOR_SWARM"
+	size = small
+	icon = "GFX_ship_part_bio_reactor"
+	icon_frame = 1
+	power = 1000
+	component_set = "power_core"
+	size_restriction = { giga_queen giga_large_ship giga_large_ship_carrier giga_small_ship }
+}
+
+# Mooncraft
+utility_component_template = {
+	key = "REACTOR_MOON"
+	size = small
+	icon = "GFX_ship_part_reactor_planet"
+	icon_frame = 1
+	power = 30000
+	component_set = "power_core"
+	size_restriction = { giga_massive_planet }
+}
+
+# Planetcraft
+utility_component_template = {
+	key = "REACTOR_PLANET"
+	size = small
+	icon = "GFX_ship_part_reactor_planet"
+	icon_frame = 1
+	power = 100000
+	component_set = "power_core"
+	size_restriction = { giga_planet_behemoth giga_planet_behemoth_fe }
+}
+
+# Systemcraft
+utility_component_template = {
+	key = "REACTOR_SYSTEM"
+	size = small
+	icon = "GFX_ship_part_reactor_planet"
+	icon_frame = 1
+	power = 9600000
+	component_set = "power_core"
+	prerequisites = { "giga_tech_war_system_2" }
+	size_restriction = { giga_systemcraft }
+	ai_weight = { weight = 10000 } # fix 'normal' reactors being potentially autopicked if they are somehow valid for the systemcraft
+}
+
+# Compound
+utility_component_template = {
+	key = "COMPOUND_REACTOR_CORVETTE"
+	size = small
+	icon = "GFX_compound_reactor"
+	icon_frame = 1
+	power = 20000
+	component_set = "power_core"
+	prerequisites = { "tech_compound_reactors" }
+	ai_weight = {
+		weight = @ehof_t2_weight
+		modifier = {
+			factor = 0.0
+			ehof_default_country = yes
+			OR =  {
+				has_monthly_income = { resource = ehof_sr_sentient_metal value <= 0 }
+				has_monthly_income = { resource = sr_dark_matter value <= 0 }
+			}
+		}
+	}
+	resources = {
+		category = ship_components
+		cost = { sr_dark_matter = @ehof_corvette_reactor_cost_2 }
+		upkeep = {
+			energy = @ehof_corvette_reactor_upkeep_energy_2
+		}
+	}
+}

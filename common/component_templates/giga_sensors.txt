@@ -1,0 +1,28 @@
+###############
+### SENSORS ###
+###############
+# 混合者探测器
+utility_component_template = {
+	key = "COMPOUND_SENSOR"
+	size = medium
+	icon = "GFX_compound_sensor"
+	icon_frame = 1
+	power = @ehof_sensor_power2
+	prerequisites = { "tech_compound_sensors" }
+	sensor_range = @ehof_t2_sensor_range
+	hyperlane_range = @ehof_t2_sensor_hyperlane
+	ship_modifier = { ship_tracking_add = @ehof_t2_sensor_tracking }
+	component_set = "sensor_components"
+	ai_weight = {
+		weight = @ehof_t2_sensor_weight
+		modifier = {
+			factor = 0.0
+			ehof_default_country = yes
+			has_monthly_income = { resource = sr_dark_matter value <= 0 }
+		}
+	}
+	resources = {
+		category = ship_components
+		cost = { sr_dark_matter = @ehof_sensor_cost2 }
+	}
+}

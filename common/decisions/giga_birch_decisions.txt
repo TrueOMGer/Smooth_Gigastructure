@@ -1,0 +1,62 @@
+decision_birch_crew = {
+	owned_planets_only = yes
+	sound = event_administrative_work
+	icon = decision_binary_stars
+	enactment_time = 100
+	ai_weight = { weight = 0 }
+
+	potential = {
+		is_planet_class = pc_birch
+	}
+
+	resources = {
+		category = decisions
+		cost = { unity = 1000 }
+	}
+
+	allow = {
+		count_owned_pop = { count >= 41 }
+	}
+
+	effect = {
+		change_variable = { which = "birch_extension_grade" value = 1 }
+		add_deposit = d_birch_subdistrict
+		hidden_effect = {
+		    while = {
+			    count = 40
+			    random_owned_pop = { kill_pop = yes }
+		    }
+		}
+	}
+}
+
+decision_recall_birch_resident = {
+	owned_planets_only = yes
+	sound = event_administrative_work
+	icon = decision_artifact_relays_machine
+	enactment_time = 100
+	ai_weight = { weight = 0 }
+
+	potential = {
+		is_planet_class = pc_birch
+	}
+
+	resources = {
+		category = decisions
+		cost = { unity = 1000 }
+	}
+
+	allow = {
+		has_deposit = d_birch_subdistrict
+	}
+
+	effect = {
+		change_variable = { which = "birch_extension_grade" value = -1 }
+		remove_deposit = d_birch_subdistrict
+		while = {
+			count = 40
+			create_pop = { species = owner }
+		}
+		
+	}
+}
