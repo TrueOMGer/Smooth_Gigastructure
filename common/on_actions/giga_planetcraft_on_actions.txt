@@ -1,0 +1,6 @@
+#################################################################################################################
+################################################# PLANTCRAFT EVENTS #############################################
+#################################################################################################################
+on_ship_destroyed_victim = { events = { giga_mega.601 } }			# War Moon Destroyed event
+on_ship_destroyed_victim = { events = { giga_mega.701 } }			# War Planet Destroyed event
+on_ship_disabled = { events = { giga_mega.711 } }			        # War System event
