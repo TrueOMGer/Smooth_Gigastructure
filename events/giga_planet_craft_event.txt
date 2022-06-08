@@ -1,0 +1,162 @@
+####################################
+### War Moon was destroyed #########
+####################################
+country_event = {
+	id = giga_mega.601
+	title = "giga_mega.601.name"
+	desc = "giga_mega.601.desc"
+	picture = GFX_evt_exploding_planet
+	show_sound = event_structural_collapse
+	is_triggered_only = yes
+	option = { name = "giga_mega.601.a" }
+
+	trigger = {
+		NOT = { has_country_flag = eeloowinies }
+		fromfrom = {
+			is_ship_size = giga_massive_planet
+			NOT = { has_ship_flag = giga_moon_fe }
+		}
+	}
+
+	immediate = {
+		subtract_variable = {
+			which = giga_current_warmoon
+			value = 1
+		}
+		fromfrom = {
+			solar_system = { save_event_target_as = giga_debris_system }
+			solar_system = {
+				set_timed_star_flag = { flag = giga_has_craft_debris days = 360 }
+				spawn_planet = {
+					class = pc_giga_empty_space
+					location = prev
+					init_effect = { save_event_target_as = giga_temp_planet }
+				}
+				create_ambient_object = {
+					type = attack_moon_death_explosion_effect
+					location = ROOT.fromfrom
+					duration = 30
+					use_3d_location = yes
+					entity_offset = 0
+					scale = 1
+				}
+				every_ship_in_system = {
+					limit = { 
+					owner = { is_country = ROOT }
+				    }
+					repair_ship = yes
+				}
+			}
+			solar_system = { spawn_megastructure = { type = "war_moon_debris_cold_barren"	coords_from = event_target:giga_temp_planet owner = owner } }
+			event_target:giga_temp_planet = { remove_planet = yes }
+		}
+	}
+}
+
+# Success
+country_event = {
+	id = giga_mega.602
+	title = "giga_mega.602.name"
+	desc = "giga_mega.602.desc"
+	picture = GFX_evt_attack_moon
+	show_sound = event_ringworld_build_complete
+	is_triggered_only = yes
+	option = { name = "giga_mega.602.a" }
+}
+
+####################################
+### War Planet was destroyed #######
+####################################
+country_event = {
+	id = giga_mega.701
+	title = "giga_mega.701.name"
+	desc = "giga_mega.701.desc"
+	picture = GFX_evt_exploding_planet
+	show_sound = event_super_explosion
+	is_triggered_only = yes
+	option = { name = "giga_mega.701.a" }
+
+	trigger = {
+		fromfrom = {
+			OR = {
+				is_ship_size = giga_planet_behemoth
+				is_ship_size = giga_planet_behemoth_fe
+			}
+			NOT = { has_ship_flag = giga_planet_fe }
+		}
+	}
+
+	immediate = {
+		subtract_variable = {
+			which = giga_current_warplanet
+			value = 1
+		}
+		fromfrom = {
+			solar_system = { save_event_target_as = giga_debris_system }
+			solar_system = {
+				set_timed_star_flag = { flag = giga_has_craft_debris days = 360 }
+				spawn_planet = {
+					class = pc_giga_empty_space
+					location = prev
+					init_effect = { save_event_target_as = giga_temp_planet }
+				}
+				create_ambient_object = {
+					type = planetcraft_death_explosion_effect
+					location = ROOT.fromfrom
+					duration = 30
+					use_3d_location = yes
+					entity_offset = 0
+					scale = 1
+				}
+				spawn_megastructure = {
+					type = "war_planet_debris"
+					coords_from = event_target:giga_temp_planet
+					owner = owner
+				}
+				every_ship_in_system = {
+					limit = { 
+					owner = { NOT = { is_country = ROOT } }
+				    }
+					add_modifier = {
+						modifier = phase_perturbations
+						days = 30
+					}
+				}
+			}
+			event_target:giga_temp_planet = { remove_planet = yes }
+		}
+	}
+}
+
+# Success
+country_event = {
+	id = giga_mega.702
+	title = "giga_mega.702.name"
+	desc = "giga_mega.702.desc"
+	picture = GFX_evt_debris
+	show_sound = event_ringworld_build_complete
+	is_triggered_only = yes
+	option = { name = "giga_mega.702.a" }
+}
+
+####################################
+### War System was destroyed #######
+####################################
+ship_event = {
+	id = giga_mega.711
+	title = "giga_mega.711.name"
+	desc = "giga_mega.711.desc"
+	picture = GFX_evt_supernova
+	show_sound = event_super_explosion
+	is_triggered_only = yes
+	option = { name = "giga_mega.711.a" }
+
+	trigger = {
+		is_ship_size = giga_systemcraft
+	}
+
+	immediate = {
+		repair_ship = yes
+		set_disabled = no
+	}
+}
